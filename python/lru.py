@@ -35,6 +35,7 @@ class Lru:
         else:
             newEntry = Entry(key, value)
             if len(self.entryMap) == self.lruSize:
+                del self.entryMap[self.end.key]
                 self._removeEntry(self.end)
             self.entryMap[key] = newEntry
             self._addAtStart(newEntry)

@@ -71,17 +71,12 @@ class LruTest(unittest.TestCase):
         lru.addEntry(1, 2)
         lru.addEntry(2, 4)
         lru.addEntry(3, 6)
-        lru.printDoublyLinkedList()
         lru.getEntry(0)
-        lru.printDoublyLinkedList()
         lru.addEntry(4, 8)
-        lru.printDoublyLinkedList()
         node = lru.getEntry(1)
-        lru.printDoublyLinkedList()
         lru.addEntry(5, 10)
-        lru.printDoublyLinkedList()
 
         vals = lru.getCacheInOrder()
-        self.assertEqual(vals, [8, 0, 6, 4])
+        self.assertEqual(vals, [10, 8, 0, 6])
         self.assertEqual(
             node, -1, 'Node having key 1 should have been evicted')
