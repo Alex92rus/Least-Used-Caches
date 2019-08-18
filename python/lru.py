@@ -35,6 +35,7 @@ class Lru:
         else:
             newEntry = Entry(key, value)
             if len(self.entryMap) == self.lruSize:
+                del self.entryMap[self.end.key]
                 self._removeEntry(self.end)
             self.entryMap[key] = newEntry
             self._addAtStart(newEntry)
@@ -62,13 +63,21 @@ class Lru:
         if self.end is None:
             self.end = self.start
 
-
     def printDoublyLinkedList(self):
         iterDL = self.start
         while iterDL is not None:
             print("({}->{})=>".format(iterDL.key, iterDL.value), end="")
             iterDL = iterDL.right
         print("None")
+
+    def getCacheInOrder(self, lastFirst=True):
+        res = []
+        iterDL = self.start if lastFirst else self.end
+        while iterDL is not None:
+            res.append(iterDL.value)
+            iterDL = iterDL.right if lastFirst else iterDL.left
+        return res
+
 
 if __name__ == '__main__':
     lru = Lru()
