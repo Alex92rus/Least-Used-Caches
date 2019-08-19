@@ -41,7 +41,6 @@ class Lru:
             self._addAtStart(newEntry)
 
     def _removeEntry(self, entry):
-
         if entry.right is not None:
             entry.right.left = entry.left
         else:
@@ -53,7 +52,6 @@ class Lru:
             self.start = entry.right
 
     def _addAtStart(self, entry):
-
         if self.start is not None:
             self.start.left = entry
 
@@ -62,6 +60,11 @@ class Lru:
 
         if self.end is None:
             self.end = self.start
+
+    def printEntryMap(self):
+        print("Contents Of Entry Map: Key -> Value of Entry")
+        for key in self.entryMap:
+            print("key: {} => value: {}".format(key, self.entryMap[key].value))
 
     def printDoublyLinkedList(self):
         iterDL = self.start
@@ -78,9 +81,9 @@ class Lru:
             iterDL = iterDL.right if lastFirst else iterDL.left
         return res
 
-
 if __name__ == '__main__':
     lru = Lru()
     lru.addEntry(4, 16)
     lru.addEntry(3, 9)
     lru.printDoublyLinkedList()
+    lru.printEntryMap()
